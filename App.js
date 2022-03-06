@@ -2,24 +2,25 @@ import { StatusBar } from 'expo-status-bar';
 import {useEffect, useState} from 'react';
 import { StyleSheet, Text, View, Button, Alert } from 'react-native';
 import CustomButton from './Components/CustomButton';
+import CountButton from "./Components/CountButton";
 import {getPokemons} from "./Api/pokemon";
 
 export default function App() {
 
-    const [newText, setNewText] = useState('bouton');
+    const [newText, setNewText] = useState('Click me');
+    const [number, setNumber] = useState(0);
+    const [listPokemon, setListPokemon] = useState([]);
 
     const displayColor = (color) => {
         console.log(color)
     }
 
-    async function getAllPokemons() {
-        let pokemons = await getPokemons();
-        console.log(pokemons)
-    }
 
     useEffect(() => {
-        getAllPokemons();
-    })
+        getPokemons().then(datas => {
+            setListPokemon(datas)
+        })
+    });
 
     return (
         <View style={styles.container}>
@@ -28,6 +29,7 @@ export default function App() {
             <CustomButton color={"red"} text={newText} setNewText={setNewText} consoleColor={displayColor}/>
             <CustomButton color={"green"} text={newText} setNewText={setNewText} consoleColor={displayColor}/>
             <CustomButton color={"blue"} text={newText} setNewText={setNewText} consoleColor={displayColor}/>
+            <CountButton number={number} setNumber={setNumber}/>
         </View>
     );
 }
