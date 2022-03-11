@@ -12,7 +12,7 @@ export default function Home({navigation}) {
     const [isLoading, setIsLoading] = useState(true)
 
     const renderPokemon = ({item}) => (
-        <Pokemon name={item.name} url={item.url} onPress={() => navigation.navigate('PokemonScreen', {item:item})} />
+        <Pokemon name={item.name} url={item.url} navigation={navigation} />
     )
 
     const loadPokemons = (url) => {

@@ -3,11 +3,11 @@ import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
 
 export default function PokemonDetails({route}) {
 
-    const {item} = route.params
+    const {name, url} = route.params
 
     return (
         <View style={styles.container}>
-            <Text>Détails du pokémon {item.name}</Text>
+            <Text>Détails du pokémon {name}</Text>
         </View>
     );
 }

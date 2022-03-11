@@ -5,7 +5,7 @@ import {getPokemons} from "../Api/pokemon";
 
 export default function Pokemon(props) {
 
-    const { url, name, onPress, ...restProps} = props
+    const { url, name, navigation, ...restProps} = props
     const [pokemonDatas, setPokemonDatas] = useState([])
     const [pokemonImage, setPokemonImage] = useState(null)
 
@@ -17,7 +17,7 @@ export default function Pokemon(props) {
 
     return (
             <View style={styles.container}>
-                <TouchableOpacity onPress={onPress}>
+                <TouchableOpacity onPress={() => navigation.navigate('PokemonScreen', {name: name, url:url})}>
                 <Text style={styles.text}>{name}</Text>
                 {
                     pokemonImage ?
