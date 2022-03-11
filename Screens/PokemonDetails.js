@@ -7,10 +7,9 @@ import Pokemon from "../Components/Pokemon"
 
 export default function PokemonDetails() {
 
-
     return (
         <View style={styles.container}>
-            <Text>Détails</Text>
+            <Text>Détails du pokémon</Text>
         </View>
     );
 }

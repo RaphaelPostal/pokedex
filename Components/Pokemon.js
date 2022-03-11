@@ -17,7 +17,7 @@ export default function Pokemon(props) {
 
     return (
             <View style={styles.container}>
-                <Text>{name}</Text>
+                <Text style={styles.text}>{name}</Text>
                 {
                     pokemonImage ?
                         (<Image
@@ -29,7 +29,6 @@ export default function Pokemon(props) {
                             source={baseImage}
                         />)
                 }
-
             </View>
     );
 }
@@ -38,14 +37,16 @@ const styles = StyleSheet.create({
     container : {
         backgroundColor: '#45D45D',
         marginBottom: 25,
-        color: 'white',
-        padding: 10
+        padding: 10,
+        borderRadius: 10,
     },
-    text : {
-        backgroundColor: '#45D45D',
-        marginBottom: 25,
-        color: 'white',
-        padding: 10
+
+    text: {
+        color: '#ffffff',
+        fontWeight: 'bold',
+        textAlign: 'center',
+        textTransform: 'capitalize'
+
     },
 
     image : {
