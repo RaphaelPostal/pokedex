@@ -11,8 +11,8 @@ const Tab = createBottomTabNavigator()
 function PokemonStack(){
     return (
         <Stack.Navigator>
-            <Stack.Screen name="Le Pokédex" component={Home}/>
-            <Stack.Screen name="Détails" component={PokemonDetails}/>
+            <Stack.Screen name="HomeScreen" component={Home}/>
+            <Stack.Screen name="PokemonScreen" component={PokemonDetails}/>
         </Stack.Navigator>
     )
 }
@@ -27,13 +27,6 @@ export default function Navigation() {
                     headerStyle:
                         {backgroundColor: '#45D45D'}
                 }} name="Home" component={PokemonStack}/>
-                <Tab.Screen options={{
-                    title: "Details",
-                    headerTintColor: "white",
-                    headerStyle:
-                        {backgroundColor: '#45D45D'}
-                }} name="Détails" component={PokemonStack}/>
-
             </Tab.Navigator>
         </NavigationContainer>
     )
