@@ -14,7 +14,7 @@ function PokemonStack(){
             <Stack.Screen name="Le pokédex" component={Home}/>
             <Stack.Screen name="PokemonScreen" component={PokemonDetails}/>
         </Stack.Navigator>
-    )   
+    )
 }
 
 export default function Navigation() {

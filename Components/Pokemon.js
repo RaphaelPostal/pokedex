@@ -1,11 +1,11 @@
 import React, {useState, useEffect} from 'react';
-import {StyleSheet, Text, Image, View} from "react-native";
+import {StyleSheet, Text, Image, View, TouchableOpacity} from "react-native";
 import baseImage from '../assets/pokeball.png'
 import {getPokemons} from "../Api/pokemon";
 
 export default function Pokemon(props) {
 
-    const { url, name, ...restProps} = props
+    const { url, name, onPress, ...restProps} = props
     const [pokemonDatas, setPokemonDatas] = useState([])
     const [pokemonImage, setPokemonImage] = useState(null)
 
@@ -17,6 +17,7 @@ export default function Pokemon(props) {
 
     return (
             <View style={styles.container}>
+                <TouchableOpacity onPress={onPress}>
                 <Text style={styles.text}>{name}</Text>
                 {
                     pokemonImage ?
@@ -29,6 +30,7 @@ export default function Pokemon(props) {
                             source={baseImage}
                         />)
                 }
+                </TouchableOpacity>
             </View>
     );
 }
@@ -37,20 +39,21 @@ const styles = StyleSheet.create({
     container : {
         backgroundColor: '#45D45D',
         marginBottom: 25,
-        padding: 10,
+        padding: 15,
         borderRadius: 10,
     },
 
     text: {
         color: '#ffffff',
         fontWeight: 'bold',
+        fontSize: 20,
         textAlign: 'center',
         textTransform: 'capitalize'
 
     },
 
     image : {
-        width: 100,
-        height: 100
+        width: 170,
+        height: 170
     }
 });

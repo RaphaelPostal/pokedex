@@ -5,14 +5,14 @@ import {getPokemons} from "../Api/pokemon";
 import { FlatList } from "react-native";
 import Pokemon from "../Components/Pokemon"
 
-export default function Home() {
+export default function Home({navigation}) {
 
     const [listPokemon, setListPokemon] = useState([]);
     const [nextPage, setNextPage] = useState("https://pokeapi.co/api/v2/pokemon");
     const [isLoading, setIsLoading] = useState(true)
 
     const renderPokemon = ({item}) => (
-        <Pokemon name={item.name} url={item.url}/>
+        <Pokemon name={item.name} url={item.url} onPress={() => navigation.navigate('PokemonScreen', {item:item})} />
     )
 
     const loadPokemons = (url) => {

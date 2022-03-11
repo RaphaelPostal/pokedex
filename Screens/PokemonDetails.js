@@ -1,15 +1,13 @@
-import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, ActivityIndicator } from 'react-native';
-import {getPokemons} from "../Api/pokemon";
-import { FlatList } from "react-native";
-import Pokemon from "../Components/Pokemon"
 
-export default function PokemonDetails() {
+export default function PokemonDetails({route}) {
+
+    const {item} = route.params
 
     return (
         <View style={styles.container}>
-            <Text>Détails du pokémon</Text>
+            <Text>Détails du pokémon {item.name}</Text>
         </View>
     );
 }
