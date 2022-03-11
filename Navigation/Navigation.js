@@ -12,7 +12,7 @@ function PokemonStack(){
     return (
         <Stack.Navigator>
             <Stack.Screen name="Le pokédex" component={Home}/>
-            <Stack.Screen name="PokemonScreen" component={PokemonDetails}/>
+            <Stack.Screen name="Détails" component={PokemonDetails}/>
         </Stack.Navigator>
     )
 }

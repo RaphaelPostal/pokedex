@@ -11,19 +11,19 @@ export default function Pokemon(props) {
 
     if (pokemonDatas.length === 0) {
         getPokemons(url).then(data => {
-           setPokemonImage(data.sprites)
+           setPokemonImage(data.sprites.other['official-artwork'].front_default)
         })
     }
 
     return (
             <View style={styles.container}>
-                <TouchableOpacity onPress={() => navigation.navigate('PokemonScreen', {name: name, url:url})}>
+                <TouchableOpacity onPress={() => navigation.navigate('Détails', {name: name, url:url, image: pokemonImage})}>
                 <Text style={styles.text}>{name}</Text>
                 {
                     pokemonImage ?
                         (<Image
                             style={styles.image}
-                            source={{uri : pokemonImage.front_default}}
+                            source={{uri : pokemonImage}}
                         />)
                         : (<Image
                             style={styles.image}
