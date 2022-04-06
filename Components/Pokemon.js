@@ -8,16 +8,18 @@ export default function Pokemon(props) {
     const { url, name, navigation, ...restProps} = props
     const [pokemonDatas, setPokemonDatas] = useState([])
     const [pokemonImage, setPokemonImage] = useState(null)
+    const [pokemonType, setPokemonType] = useState(null)
 
     if (pokemonDatas.length === 0) {
         getPokemons(url).then(data => {
            setPokemonImage(data.sprites.other['official-artwork'].front_default)
+           setPokemonType(data.types[0].type.name)
         })
     }
 
     return (
             <View style={styles.container}>
-                <TouchableOpacity onPress={() => navigation.navigate('Détails', {name: name, url:url, image: pokemonImage})}>
+                <TouchableOpacity onPress={() => navigation.navigate('Détails', {name: name, url:url, image: pokemonImage, type:pokemonType})}>
                 <Text style={styles.text}>{name}</Text>
                 {
                     pokemonImage ?
