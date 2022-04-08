@@ -11,10 +11,14 @@ export default function Pokemon(props) {
     const [pokemonType, setPokemonType] = useState(null)
 
     if (pokemonDatas.length === 0) {
-        getPokemons(url).then(data => {
-           setPokemonImage(data.sprites.other['official-artwork'].front_default)
-           setPokemonType(data.types[0].type.name)
-        })
+        if (url) {
+            console.log(url)
+            getPokemons(url).then(data => {
+                setPokemonImage(data.sprites.other['official-artwork'].front_default)
+                setPokemonType(data.types[0].type.name)
+            })
+        }
+
     }
 
     return (

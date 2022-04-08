@@ -1,9 +1,11 @@
 import Home from '../Screens/Home';
+import Search from '../Screens/Search';
 import PokemonDetails from '../Screens/PokemonDetails';
 import React, { useEffect, useState } from 'react';
 import {NavigationContainer} from "@react-navigation/native"
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs"
 import {createStackNavigator} from "@react-navigation/stack";
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 const Stack = createStackNavigator()
 const Tab = createBottomTabNavigator()
@@ -17,6 +19,15 @@ function PokemonStack(){
     )
 }
 
+function SearchStack(){
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Rechercher un pokémon" component={Search}/>
+            <Stack.Screen name="Détails" component={PokemonDetails}/>
+        </Stack.Navigator>
+    )
+}
+
 export default function Navigation() {
     return (
         <NavigationContainer>
@@ -25,8 +36,17 @@ export default function Navigation() {
                     title: "Pokédex",
                     headerTintColor: "white",
                     headerStyle:
-                        {backgroundColor: '#45D45D'}
-                }} name="Home" component={PokemonStack}/>
+                        {backgroundColor: '#45D45D'},
+                    tabBarIcon: ({}) => {return <Ionicons name={'home'} size={24} color={'black'}/>}
+                }} name="Home" component={PokemonStack} />
+                <Tab.Screen options={{
+                    title: "Recherche",
+                    headerTintColor: "white",
+                    headerStyle:
+                        {backgroundColor: '#45D45D'},
+                    tabBarIcon: ({}) => {return <Ionicons name={'search'} size={24} color={'black'}/>}
+
+                }} name="Recherche" component={SearchStack}/>
             </Tab.Navigator>
         </NavigationContainer>
     )
