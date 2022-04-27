@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import {StyleSheet, Text, View, ActivityIndicator, FlatList} from 'react-native';
 import {TextInput} from "react-native";
-import {getPokemons} from "../Api/pokemon";
+import {getOnePokemon} from "../Api/pokemon";
 import Pokemon from "../Components/Pokemon";
 
 export default function Search({navigation}) {
     //create a search function to find a pokemon by name
     const [pokemonName, setPokemonName] = useState(null);
-    const [pokemonUrl, setPokemonUrl] = useState(null);
+    const [pokemonImage, setPokemonImage] = useState(null);
+    const [pokemonType, setPokemonType] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [search, setSearch] = useState('');
@@ -15,17 +16,17 @@ export default function Search({navigation}) {
     const searchPokemon = async (name) => {
         setLoading(true)
         try {
-            getPokemons(`https://pokeapi.co/api/v2/pokemon/${name}`).then(datas => {
+            getOnePokemon(`https://pokeapi.co/api/v2/pokemon/${name}`).then(datas => {
 
                 if (datas !== undefined) {
                     setPokemonName(datas.forms[0].name);
-                    setPokemonUrl(datas.forms[0].name);
-                    console.log(datas)
-                    setLoading(false)
-                    console.log('resultat')
+                    setPokemonImage(datas.sprites.other['official-artwork'].front_default);
+                    setPokemonType(datas.types[0].type.name);
+
                 } else {
                     console.log('aucun résultat')
                 }
+                setLoading(false)
 
             })
 
@@ -38,11 +39,9 @@ export default function Search({navigation}) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Search for a Pokemon</Text>
-            <Text style={styles.subtitle}>Enter a name below</Text>
             <TextInput
                 style={styles.input}
-                onChangeText={(text) => {searchPokemon(text); setSearch(text)}}
+                onChangeText={(text) => {searchPokemon(text.toLowerCase()); setSearch(text)}}
                 value={search}
                 placeholder="Entrez un nom"
             />
@@ -54,7 +53,7 @@ export default function Search({navigation}) {
                     {error ? (
                         <Text style={styles.error}>{error}</Text>
                     ) : (
-                        <Pokemon name={pokemonName} url={pokemonUrl} navigation={navigation} />
+                        <Pokemon name={pokemonName} image={pokemonImage} type={pokemonType} navigation={navigation} />
                     )}
                 </View>
             )}
@@ -67,7 +66,6 @@ const styles = StyleSheet.create({
         paddingTop: 40,
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center',
     },
 
     text: {
@@ -75,5 +73,15 @@ const styles = StyleSheet.create({
         marginBottom: 25,
         color: 'white',
         padding: 10
+    },
+
+    input: {
+        width: '90%',
+        borderColor: '#45D45D',
+        borderWidth: 1,
+        padding: 10,
+        marginBottom: 10,
+        borderRadius: 10
+
     }
 });

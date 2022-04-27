@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {StyleSheet, Text, View, ActivityIndicator, Image} from 'react-native';
+import {AsyncStorage} from "react-native";
 
 export default function PokemonDetails({route}) {
 
@@ -8,6 +9,33 @@ export default function PokemonDetails({route}) {
     const [typeColor, setTypeColor] = useState(null)
 
     useEffect(() => {
+        let UID123_object = {
+            name: 'Chris',
+            age: 30,
+            traits: { hair: 'brown', eyes: 'brown' }
+        };
+// You only need to define what will be added or updated
+        let UID123_delta = {
+            age: 31,
+            traits: { eyes: 'blue', shoe_size: 10 }
+        };
+
+        AsyncStorage.setItem(
+            'UID123',
+            JSON.stringify(UID123_object),
+            () => {
+                AsyncStorage.mergeItem(
+                    'UID123',
+                    JSON.stringify(UID123_delta),
+                    () => {
+                        AsyncStorage.getItem('UID123', (err, result) => {
+                            console.log(result);
+                        });
+                    }
+                );
+            }
+        );
+
         switch (type) {
             case 'normal':
                 setTypeColor('#A8A77A')

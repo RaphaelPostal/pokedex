@@ -5,21 +5,21 @@ import {getPokemons} from "../Api/pokemon";
 
 export default function Pokemon(props) {
 
-    const { url, name, navigation, ...restProps} = props
-    const [pokemonDatas, setPokemonDatas] = useState([])
+    const { url, name, type, navigation, image, ...restProps} = props
     const [pokemonImage, setPokemonImage] = useState(null)
     const [pokemonType, setPokemonType] = useState(null)
 
-    if (pokemonDatas.length === 0) {
-        if (url) {
-            console.log(url)
+    useEffect(() => {
+        if (url !== null && url !== undefined) {
             getPokemons(url).then(data => {
                 setPokemonImage(data.sprites.other['official-artwork'].front_default)
                 setPokemonType(data.types[0].type.name)
             })
+        } else { //on utilise les props passées depuis la recherche
+            setPokemonImage(image)
+            setPokemonType(type)
         }
-
-    }
+    }, [])
 
     return (
             <View style={styles.container}>
