@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {StyleSheet, Text, View, ActivityIndicator, Image} from 'react-native';
+import {StyleSheet, Text, View, ActivityIndicator, Image, Button} from 'react-native';
 import {AsyncStorage} from "react-native";
 
 export default function PokemonDetails({route}) {
@@ -8,33 +8,45 @@ export default function PokemonDetails({route}) {
 
     const [typeColor, setTypeColor] = useState(null)
 
-    useEffect(() => {
-        let UID123_object = {
-            name: 'Chris',
-            age: 30,
-            traits: { hair: 'brown', eyes: 'brown' }
-        };
-// You only need to define what will be added or updated
-        let UID123_delta = {
-            age: 31,
-            traits: { eyes: 'blue', shoe_size: 10 }
-        };
 
-        AsyncStorage.setItem(
-            'UID123',
-            JSON.stringify(UID123_object),
-            () => {
-                AsyncStorage.mergeItem(
-                    'UID123',
-                    JSON.stringify(UID123_delta),
-                    () => {
-                        AsyncStorage.getItem('UID123', (err, result) => {
-                            console.log(result);
-                        });
-                    }
-                );
+    const addPokemonInTeam = () => {
+
+        let newPokemon = {
+            name: name,
+            url: url,
+            image: image,
+            type: type,
+            typeColor: typeColor
+        }
+
+        AsyncStorage.getItem('team').then(value => {
+            let team = JSON.parse(value)
+            if (team.length < 6) {
+                if (team.find(pokemon => pokemon.name === newPokemon.name)) {
+                    alert('Vous avec déjà ce pokemon dans votre team ...')
+                } else {
+                    team.push(newPokemon)
+                    AsyncStorage.setItem('team', JSON.stringify(team), () => {
+                        console.log(team)
+                    })
+                    alert('Pokémon ajouté !')
+                }
+            } else {
+                alert('Votre team est pleine !')
             }
-        );
+
+        })
+
+    }
+
+    useEffect(() => {
+
+        AsyncStorage.getItem('team', (err, result) => {
+            if(result === null) {
+                let team = []
+                AsyncStorage.setItem('team', JSON.stringify([]));
+            }
+        })
 
         switch (type) {
             case 'normal':
@@ -108,6 +120,7 @@ export default function PokemonDetails({route}) {
             <View style={ {backgroundColor: typeColor, marginTop : 20, padding : 10, borderRadius: 10 } }>
                 <Text style={styles.type}>{type}</Text>
             </View>
+            <Button onPress={addPokemonInTeam} title="Ajouter à ma team"/>
         </View>
     );
 }
