@@ -7,6 +7,7 @@ export default function PokemonDetails({route}) {
     const {name, url, image, type} = route.params
 
     const [typeColor, setTypeColor] = useState(null)
+    const [team, setTeam] = useState(null)
 
 
     const addPokemonInTeam = () => {
@@ -39,13 +40,41 @@ export default function PokemonDetails({route}) {
 
     }
 
+    const removePokemonInTeam = () => {
+
+        let newPokemon = {
+            name: name,
+            url: url,
+            image: image,
+            type: type,
+            typeColor: typeColor
+        }
+
+        AsyncStorage.getItem('team').then(value => {
+            let team = JSON.parse(value)
+            let pokemonToRemove = team.find(pokemon => pokemon.name === newPokemon.name)
+            team.splice(team.indexOf(pokemonToRemove), 1)
+            AsyncStorage.setItem('team', JSON.stringify(team), () => {
+                console.log(team)
+            })
+
+        })
+
+    }
+
     useEffect(() => {
 
         AsyncStorage.getItem('team', (err, result) => {
             if(result === null) {
                 let team = []
                 AsyncStorage.setItem('team', JSON.stringify([]));
+                setTeam(team)
+            } else {
+                AsyncStorage.getItem('team').then(value => {
+                    setTeam(JSON.parse(value))
+                })
             }
+
         })
 
         switch (type) {
@@ -117,10 +146,15 @@ export default function PokemonDetails({route}) {
                 style={styles.image}
                 source={{uri : image}}
             />
-            <View style={ {backgroundColor: typeColor, marginTop : 20, padding : 10, borderRadius: 10 } }>
+            <View style={ {backgroundColor: typeColor, marginTop : 20, marginBottom: 20, padding : 10, borderRadius: 10 } }>
                 <Text style={styles.type}>{type}</Text>
             </View>
-            <Button onPress={addPokemonInTeam} title="Ajouter à ma team"/>
+            {
+                team !== null && team.find(pokemon => pokemon.name === name) ?
+                    <Button onPress={removePokemonInTeam} title="Retirer de ma team" color="#FF3359"/>
+                    :
+                    <Button onPress={addPokemonInTeam} title="Ajouter à ma team" color="#45D45D"/>
+            }
         </View>
     );
 }
@@ -157,10 +191,12 @@ const styles = StyleSheet.create({
         color: 'white'
     },
 
-    type_container: {
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        marginTop: 20,
+    addButton : {
+        marginTop: 50,
+        backgroundColor: '#45D45D',
+        color: 'white',
         padding: 10,
+        borderRadius: 10,
+        width: 200
     }
 });
