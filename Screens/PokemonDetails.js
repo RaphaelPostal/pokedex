@@ -160,13 +160,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
 
-    text: {
-        backgroundColor: '#45D45D',
-        marginBottom: 25,
-        color: 'white',
-        padding: 10,
-    },
-
     title: {
         marginTop: 30,
         fontSize: 40,

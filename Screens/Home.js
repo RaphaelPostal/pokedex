@@ -54,11 +54,4 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
-
-    text: {
-        backgroundColor: '#45D45D',
-        marginBottom: 25,
-        color: 'white',
-        padding: 10
-    }
 });
