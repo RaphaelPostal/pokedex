@@ -9,7 +9,6 @@ export default function PokemonDetails({route}) {
     const [typeColor, setTypeColor] = useState(null)
     const [team, setTeam] = useState(null)
 
-
     const addPokemonInTeam = () => {
 
         let newPokemon = {
@@ -24,18 +23,17 @@ export default function PokemonDetails({route}) {
             let team = JSON.parse(value)
             if (team.length < 6) {
                 if (team.find(pokemon => pokemon.name === newPokemon.name)) {
-                    alert('Vous avec déjà ce pokemon dans votre team ...')
                 } else {
                     team.push(newPokemon)
                     AsyncStorage.setItem('team', JSON.stringify(team), () => {
                         console.log(team)
                     })
-                    alert('Pokémon ajouté !')
                 }
             } else {
                 alert('Votre team est pleine !')
             }
 
+            setTeam(team)
         })
 
     }
@@ -57,6 +55,7 @@ export default function PokemonDetails({route}) {
             AsyncStorage.setItem('team', JSON.stringify(team), () => {
                 console.log(team)
             })
+            setTeam(team)
 
         })
 
@@ -155,6 +154,7 @@ export default function PokemonDetails({route}) {
                     :
                     <Button onPress={addPokemonInTeam} title="Ajouter à ma team" color="#45D45D"/>
             }
+
         </View>
     );
 }
