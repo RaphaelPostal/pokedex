@@ -15,6 +15,7 @@ export default function Search({navigation}) {
 
     const searchPokemon = async (name) => {
         setLoading(true)
+        console.log('recherche')
         try {
             getOnePokemon(`https://pokeapi.co/api/v2/pokemon/${name}`).then(datas => {
 
@@ -22,9 +23,9 @@ export default function Search({navigation}) {
                     setPokemonName(datas.forms[0].name);
                     setPokemonImage(datas.sprites.other['official-artwork'].front_default);
                     setPokemonType(datas.types[0].type.name);
-
+                    setError(null);
                 } else {
-                    console.log('aucun résultat')
+                    setError('Aucun résultat')
                 }
                 setLoading(false)
 
@@ -50,7 +51,7 @@ export default function Search({navigation}) {
             ) : (
                 <View>
                     <Text style={styles.error}>Résultats : </Text>
-                    {error ? (
+                    {error !== null ? (
                         <Text style={styles.error}>{error}</Text>
                     ) : (
                         <Pokemon name={pokemonName} image={pokemonImage} type={pokemonType} navigation={navigation} />
