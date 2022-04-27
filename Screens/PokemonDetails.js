@@ -7,7 +7,7 @@ export default function PokemonDetails({route}) {
     const {name, url, image, type} = route.params
 
     const [typeColor, setTypeColor] = useState(null)
-    const [team, setTeam] = useState(null)
+    const [myTeam, setMyTeam] = useState(null)
 
     const addPokemonInTeam = () => {
 
@@ -22,8 +22,7 @@ export default function PokemonDetails({route}) {
         AsyncStorage.getItem('team').then(value => {
             let team = JSON.parse(value)
             if (team.length < 6) {
-                if (team.find(pokemon => pokemon.name === newPokemon.name)) {
-                } else {
+                if (!team.find(pokemon => pokemon.name === newPokemon.name)) {
                     team.push(newPokemon)
                     AsyncStorage.setItem('team', JSON.stringify(team))
                 }
@@ -31,7 +30,7 @@ export default function PokemonDetails({route}) {
                 alert('Votre team est pleine !')
             }
 
-            setTeam(team)
+            setMyTeam(team)
         })
 
     }
@@ -51,7 +50,7 @@ export default function PokemonDetails({route}) {
             let pokemonToRemove = team.find(pokemon => pokemon.name === newPokemon.name)
             team.splice(team.indexOf(pokemonToRemove), 1)
             AsyncStorage.setItem('team', JSON.stringify(team))
-            setTeam(team)
+            setMyTeam(team)
 
         })
 
@@ -63,10 +62,10 @@ export default function PokemonDetails({route}) {
             if(result === null) {
                 let team = []
                 AsyncStorage.setItem('team', JSON.stringify([]));
-                setTeam(team)
+                setMyTeam(team)
             } else {
                 AsyncStorage.getItem('team').then(value => {
-                    setTeam(JSON.parse(value))
+                    setMyTeam(JSON.parse(value))
                 })
             }
 
@@ -145,7 +144,7 @@ export default function PokemonDetails({route}) {
                 <Text style={styles.type}>{type}</Text>
             </View>
             {
-                team !== null && team.find(pokemon => pokemon.name === name) ?
+                myTeam !== null && myTeam.find(pokemon => pokemon.name === name) ?
                     <Button onPress={removePokemonInTeam} title="Retirer de ma team" color="#FF3359"/>
                     :
                     <Button onPress={addPokemonInTeam} title="Ajouter à ma team" color="#45D45D"/>
