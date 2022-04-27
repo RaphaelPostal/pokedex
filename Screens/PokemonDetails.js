@@ -25,9 +25,7 @@ export default function PokemonDetails({route}) {
                 if (team.find(pokemon => pokemon.name === newPokemon.name)) {
                 } else {
                     team.push(newPokemon)
-                    AsyncStorage.setItem('team', JSON.stringify(team), () => {
-                        console.log(team)
-                    })
+                    AsyncStorage.setItem('team', JSON.stringify(team))
                 }
             } else {
                 alert('Votre team est pleine !')
@@ -52,9 +50,7 @@ export default function PokemonDetails({route}) {
             let team = JSON.parse(value)
             let pokemonToRemove = team.find(pokemon => pokemon.name === newPokemon.name)
             team.splice(team.indexOf(pokemonToRemove), 1)
-            AsyncStorage.setItem('team', JSON.stringify(team), () => {
-                console.log(team)
-            })
+            AsyncStorage.setItem('team', JSON.stringify(team))
             setTeam(team)
 
         })

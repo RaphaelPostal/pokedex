@@ -1,5 +1,6 @@
 import Home from '../Screens/Home';
 import Search from '../Screens/Search';
+import Team from '../Screens/Team';
 import PokemonDetails from '../Screens/PokemonDetails';
 import React, { useEffect, useState } from 'react';
 import {NavigationContainer} from "@react-navigation/native"
@@ -28,6 +29,15 @@ function SearchStack(){
     )
 }
 
+function TeamStack() {
+    return (
+        <Stack.Navigator>
+            <Stack.Screen name="Équipe" component={Team}/>
+            <Stack.Screen name="Détails" component={PokemonDetails}/>
+        </Stack.Navigator>
+    )
+}
+
 export default function Navigation() {
     return (
         <NavigationContainer>
@@ -39,6 +49,7 @@ export default function Navigation() {
                         {backgroundColor: '#45D45D'},
                     tabBarIcon: ({}) => {return <Ionicons name={'home'} size={24} color={'black'}/>}
                 }} name="Home" component={PokemonStack} />
+
                 <Tab.Screen options={{
                     title: "Recherche",
                     headerTintColor: "white",
@@ -47,6 +58,15 @@ export default function Navigation() {
                     tabBarIcon: ({}) => {return <Ionicons name={'search'} size={24} color={'black'}/>}
 
                 }} name="Recherche" component={SearchStack}/>
+
+                <Tab.Screen options={{
+                    title: "Team",
+                    headerTintColor: "white",
+                    headerStyle:
+                        {backgroundColor: '#45D45D'},
+                    tabBarIcon: ({}) => {return <Ionicons name={'people'} size={24} color={'black'}/>}
+
+                }} name="Team" component={TeamStack}/>
             </Tab.Navigator>
         </NavigationContainer>
     )
