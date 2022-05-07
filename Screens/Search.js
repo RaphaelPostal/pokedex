@@ -5,16 +5,20 @@ import {getOnePokemon} from "../Api/pokemon";
 import Pokemon from "../Components/Pokemon";
 
 export default function Search({navigation}) {
-    //create a search function to find a pokemon by name
+
     const [pokemonName, setPokemonName] = useState(null);
     const [pokemonImage, setPokemonImage] = useState(null);
     const [pokemonType, setPokemonType] = useState(null);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
+    const [result, setResult] = useState(false);
     const [search, setSearch] = useState('');
 
     const searchPokemon = async (name) => {
         setLoading(true)
+        if (name === '' || name === null) {
+            setLoading(false)
+            setResult(false)
+        }
         try {
             getOnePokemon(`https://pokeapi.co/api/v2/pokemon/${name}`).then(datas => {
 
@@ -22,16 +26,16 @@ export default function Search({navigation}) {
                     setPokemonName(datas.forms[0].name);
                     setPokemonImage(datas.sprites.other['official-artwork'].front_default);
                     setPokemonType(datas.types[0].type.name);
-                    setError(null);
+                    setResult(true);
                 } else {
-                    setError('Aucun résultat')
+                    setResult(false)
                 }
                 setLoading(false)
 
             })
 
         } catch (error) {
-            setError(error);
+            setResult(error);
             setLoading(false);
         }
     }
@@ -48,9 +52,8 @@ export default function Search({navigation}) {
                 <ActivityIndicator size="large" color="#45D45D" />
             ) : (
                 <View>
-                    <Text style={styles.error}>Résultats : </Text>
-                    {error !== null ? (
-                        <Text style={styles.error}>{error}</Text>
+                    {result === false ? (
+                        <Text style={styles.result}>Aucun résulat</Text>
                     ) : (
                         <Pokemon name={pokemonName} image={pokemonImage} type={pokemonType} navigation={navigation} />
                     )}
@@ -75,5 +78,10 @@ const styles = StyleSheet.create({
         marginBottom: 10,
         borderRadius: 10
 
+    },
+
+    result: {
+        fontSize: 20,
+        marginVertical: 15,
     }
 });
