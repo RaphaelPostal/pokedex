@@ -40,6 +40,7 @@ export default function Team({navigation}) {
                 data={myTeam}
                 renderItem={renderPokemon}
                 keyExtractor={item => item.name}
+                numColumns={3}
             />
 
         </View>

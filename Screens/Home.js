@@ -38,6 +38,7 @@ export default function Home({navigation}) {
                 onEndReached={() => {
                     loadPokemons(nextPage)
                 }}
+                numColumns={3}
             />
             <>
                 {isLoading ? <ActivityIndicator size="large" color="#45D45D"/> : <></>}

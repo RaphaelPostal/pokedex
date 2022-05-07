@@ -15,7 +15,6 @@ export default function Search({navigation}) {
 
     const searchPokemon = async (name) => {
         setLoading(true)
-        console.log('recherche')
         try {
             getOnePokemon(`https://pokeapi.co/api/v2/pokemon/${name}`).then(datas => {
 
@@ -34,7 +33,6 @@ export default function Search({navigation}) {
         } catch (error) {
             setError(error);
             setLoading(false);
-            console.log('erreur')
         }
     }
 

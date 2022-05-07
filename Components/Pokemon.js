@@ -45,21 +45,22 @@ const styles = StyleSheet.create({
     container : {
         backgroundColor: '#45D45D',
         marginBottom: 25,
-        padding: 15,
+        marginHorizontal: 10,
+        padding: 10,
         borderRadius: 10,
     },
 
     text: {
         color: '#ffffff',
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 15,
         textAlign: 'center',
         textTransform: 'capitalize'
 
     },
 
     image : {
-        width: 170,
-        height: 170
+        width: 80,
+        height: 80
     }
 });

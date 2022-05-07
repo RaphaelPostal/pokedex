@@ -11,7 +11,7 @@ export default function PokemonDetails({route}) {
 
     const addPokemonInTeam = () => {
 
-        let newPokemon = {
+        let pokemonSelected = {
             name: name,
             url: url,
             image: image,
@@ -22,8 +22,8 @@ export default function PokemonDetails({route}) {
         AsyncStorage.getItem('team').then(value => {
             let team = JSON.parse(value)
             if (team.length < 6) {
-                if (!team.find(pokemon => pokemon.name === newPokemon.name)) {
-                    team.push(newPokemon)
+                if (!team.find(pokemon => pokemon.name === pokemonSelected.name)) {
+                    team.push(pokemonSelected)
                     AsyncStorage.setItem('team', JSON.stringify(team))
                 }
             } else {
@@ -37,7 +37,7 @@ export default function PokemonDetails({route}) {
 
     const removePokemonInTeam = () => {
 
-        let newPokemon = {
+        let pokemonSelected = {
             name: name,
             url: url,
             image: image,
@@ -47,7 +47,7 @@ export default function PokemonDetails({route}) {
 
         AsyncStorage.getItem('team').then(value => {
             let team = JSON.parse(value)
-            let pokemonToRemove = team.find(pokemon => pokemon.name === newPokemon.name)
+            let pokemonToRemove = team.find(pokemon => pokemon.name === pokemonSelected.name)
             team.splice(team.indexOf(pokemonToRemove), 1)
             AsyncStorage.setItem('team', JSON.stringify(team))
             setMyTeam(team)
