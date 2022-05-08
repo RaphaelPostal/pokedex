@@ -21,14 +21,11 @@ export default function Search({navigation}) {
         }
         try {
             getOnePokemon(`https://pokeapi.co/api/v2/pokemon/${name}`).then(datas => {
-
                 if (datas !== undefined) {
                     setPokemonName(datas.forms[0].name);
                     setPokemonImage(datas.sprites.other['official-artwork'].front_default);
                     setPokemonType(datas.types[0].type.name);
                     setResult(true);
-                } else {
-                    setResult(false)
                 }
                 setLoading(false)
 
@@ -55,7 +52,7 @@ export default function Search({navigation}) {
                     {result === false ? (
                         <Text style={styles.result}>Aucun résulat</Text>
                     ) : (
-                        <Pokemon name={pokemonName} url={`https://pokeapi.co/api/v2/pokemon/${pokemonName}`} image={pokemonImage} type={pokemonType} navigation={navigation} />
+                        <Pokemon name={pokemonName} url={`https://pokeapi.co/api/v2/pokemon/${pokemonName}`} navigation={navigation} />
                     )}
                 </View>
             )}

@@ -10,7 +10,7 @@ export default function Team({navigation}) {
     const isFocused = useIsFocused();
 
     const renderPokemon = ({item}) => (
-        <Pokemon name={item.name} url={item.url} image={item.image} type={item.type} navigation={navigation} />
+        <Pokemon name={item.name} url={item.url} navigation={navigation} />
     )
 
     const loadMyTeam = () => {

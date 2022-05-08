@@ -5,7 +5,7 @@ import {getPokemons} from "../Api/pokemon";
 
 export default function Pokemon(props) {
 
-    const { url, name, type, navigation, image, ...restProps} = props
+    const { url, name, navigation, ...restProps} = props
     const [pokemonImage, setPokemonImage] = useState(null)
     const [pokemonType, setPokemonType] = useState(null)
     const [pokemonMeasurements, setPokemonMeasurements] = useState({"height": null, "weight": null})
