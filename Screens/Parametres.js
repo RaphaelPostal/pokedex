@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
-import {StyleSheet, Text, View, Switch, ActivityIndicator, TextInput} from 'react-native';
+import {StyleSheet, Text, View, TextInput} from 'react-native';
 import CustomSwitch from '../Components/CustomSwitch';
 import SelectDropdown from 'react-native-select-dropdown';
 
@@ -13,7 +13,7 @@ export default function Parametres({navigation}) {
             <StatusBar style="auto"/>
             <View style={styles.paramLine}>
                 <Text style={styles.paramLineText}>Pseudo</Text>
-                <TextInput style={{borderBottomWidth: 1, borderBottomColor: '#CCCCCC', width: '70%'}}/>
+                <TextInput style={{borderBottomWidth: 1, borderBottomColor: '#45D45D', width: '70%', fontSize: 18}}/>
             </View>
             <View style={styles.paramLine}>
                 <Text style={styles.paramLineText}>Profil visible par tous</Text>
@@ -27,9 +27,6 @@ export default function Parametres({navigation}) {
                 <Text style={{fontSize: 18}}>Arène préférée</Text>
                 <SelectDropdown
                     buttonStyle={{bottom: 10, backgroundColor: '#DDDDDD', borderRadius: 10}}
-                    renderDropdownIcon={() => (
-                            <Text style={{fontSize: 18, fontWeight: 'bold'}}></Text>
-                    )}
                     data={arenas}
                     defaultButtonText="Choisissez l'arène"
                     onSelect={(selectedItem, index) => {
