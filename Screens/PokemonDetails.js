@@ -4,7 +4,7 @@ import {AsyncStorage} from "react-native";
 
 export default function PokemonDetails({route}) {
 
-    const {name, url, image, type} = route.params
+    const {name, url, image, type, measurements} = route.params
 
     const [typeColor, setTypeColor] = useState(null)
     const [myTeam, setMyTeam] = useState(null)
@@ -138,6 +138,8 @@ export default function PokemonDetails({route}) {
                 style={styles.image}
                 source={{uri : image}}
             />
+            <Text style={styles.measurements}>Taille : {measurements.height}</Text>
+            <Text style={styles.measurements}>Poids : {measurements.weight}</Text>
             <View style={ {backgroundColor: typeColor, marginTop : 20, marginBottom: 20, padding : 10, borderRadius: 10 } }>
                 <Text style={styles.type}>{type}</Text>
             </View>
@@ -177,12 +179,8 @@ const styles = StyleSheet.create({
         color: 'white'
     },
 
-    addButton : {
-        marginTop: 50,
-        backgroundColor: '#45D45D',
-        color: 'white',
-        padding: 10,
-        borderRadius: 10,
-        width: 200
+    measurements : {
+        fontSize: 20,
+        fontWeight: 'bold',
     }
 });

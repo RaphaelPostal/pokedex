@@ -8,19 +8,21 @@ export default function Pokemon(props) {
     const { url, name, type, navigation, image, ...restProps} = props
     const [pokemonImage, setPokemonImage] = useState(null)
     const [pokemonType, setPokemonType] = useState(null)
+    const [pokemonMeasurements, setPokemonMeasurements] = useState({"height": null, "weight": null})
 
     useEffect(() => {
 
             getPokemons(url).then(data => {
                 setPokemonImage(data.sprites.other['official-artwork'].front_default)
                 setPokemonType(data.types[0].type.name)
+                setPokemonMeasurements({"height": parseFloat(data.height / 10)+" m", "weight": parseFloat(data.weight / 10)+" kg"})
             })
 
     }, [])
 
     return (
             <View style={styles.container}>
-                <TouchableOpacity onPress={() => navigation.navigate('Détails', {name: name, url:url, image: pokemonImage, type:pokemonType})}>
+                <TouchableOpacity onPress={() => navigation.navigate('Détails', {name: name, url:url, image: pokemonImage, type:pokemonType, measurements: pokemonMeasurements})}>
                 <Text style={styles.text}>{name}</Text>
                 {
                     pokemonImage ?
