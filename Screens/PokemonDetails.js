@@ -13,9 +13,7 @@ export default function PokemonDetails({route}) {
 
         let pokemonSelected = {
             name: name,
-            url: url,
-            image: image,
-            type: type,
+            url: url
         }
 
         AsyncStorage.getItem('team').then(value => {
@@ -38,9 +36,7 @@ export default function PokemonDetails({route}) {
 
         let pokemonSelected = {
             name: name,
-            url: url,
-            image: image,
-            type: type,
+            url: url
         }
 
         AsyncStorage.getItem('team').then(value => {

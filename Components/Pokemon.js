@@ -15,7 +15,7 @@ export default function Pokemon(props) {
             getPokemons(url).then(data => {
                 setPokemonImage(data.sprites.other['official-artwork'].front_default)
                 setPokemonType(data.types[0].type.name)
-                setPokemonMeasurements({"height": parseFloat(data.height / 10)+" m", "weight": parseFloat(data.weight / 10)+" kg"})
+                setPokemonMeasurements({"height": data.height / 10 + " m", "weight": data.weight / 10 + " kg"})
             })
 
     }, [])
