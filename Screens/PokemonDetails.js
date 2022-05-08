@@ -16,7 +16,6 @@ export default function PokemonDetails({route}) {
             url: url,
             image: image,
             type: type,
-            typeColor: typeColor
         }
 
         AsyncStorage.getItem('team').then(value => {
@@ -42,7 +41,6 @@ export default function PokemonDetails({route}) {
             url: url,
             image: image,
             type: type,
-            typeColor: typeColor
         }
 
         AsyncStorage.getItem('team').then(value => {

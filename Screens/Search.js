@@ -55,7 +55,7 @@ export default function Search({navigation}) {
                     {result === false ? (
                         <Text style={styles.result}>Aucun résulat</Text>
                     ) : (
-                        <Pokemon name={pokemonName} image={pokemonImage} type={pokemonType} navigation={navigation} />
+                        <Pokemon name={pokemonName} url={`https://pokeapi.co/api/v2/pokemon/${pokemonName}`} image={pokemonImage} type={pokemonType} navigation={navigation} />
                     )}
                 </View>
             )}

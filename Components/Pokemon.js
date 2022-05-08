@@ -10,15 +10,12 @@ export default function Pokemon(props) {
     const [pokemonType, setPokemonType] = useState(null)
 
     useEffect(() => {
-        if (url !== null && url !== undefined) {
+
             getPokemons(url).then(data => {
                 setPokemonImage(data.sprites.other['official-artwork'].front_default)
                 setPokemonType(data.types[0].type.name)
             })
-        } else { //on utilise les props passées depuis la recherche
-            setPokemonImage(image)
-            setPokemonType(type)
-        }
+
     }, [])
 
     return (
