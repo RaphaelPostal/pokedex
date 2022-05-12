@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import {StyleSheet, Text, View, ActivityIndicator, Image, Button} from 'react-native';
+import {StyleSheet, Text, View, ActivityIndicator, Image, Button, TouchableOpacity} from 'react-native';
 import {AsyncStorage} from "react-native";
 
 export default function PokemonDetails({route}) {
@@ -134,16 +134,21 @@ export default function PokemonDetails({route}) {
                 style={styles.image}
                 source={{uri : image}}
             />
-            <Text style={styles.measurements}>Taille : {measurements.height}</Text>
-            <Text style={styles.measurements}>Poids : {measurements.weight}</Text>
             <View style={ {backgroundColor: typeColor, marginTop : 20, marginBottom: 20, padding : 10, borderRadius: 10 } }>
                 <Text style={styles.type}>{type}</Text>
             </View>
+            <Text style={styles.measurements}>Taille : {measurements.height}</Text>
+            <Text style={styles.measurements}>Poids : {measurements.weight}</Text>
+
             {
                 myTeam !== null && myTeam.find(pokemon => pokemon.name === name) ?
-                    <Button onPress={removePokemonInTeam} title="Retirer de ma team" color="#FF3359"/>
+                    <TouchableOpacity onPress={removePokemonInTeam} style={styles.buttonRemove}>
+                        <Text style={styles.textButton}>Retirer de ma team</Text>
+                    </TouchableOpacity>
                     :
-                    <Button onPress={addPokemonInTeam} title="Ajouter à ma team" color="#45D45D"/>
+                    <TouchableOpacity onPress={addPokemonInTeam} style={styles.buttonAdd}>
+                        <Text style={styles.textButton}>Ajouter à ma team</Text>
+                    </TouchableOpacity>
             }
 
         </View>
@@ -178,5 +183,24 @@ const styles = StyleSheet.create({
     measurements : {
         fontSize: 20,
         fontWeight: 'bold',
+    },
+
+    buttonRemove : {
+        backgroundColor: "#FF3359",
+        padding: 10,
+        borderRadius: 10,
+        marginTop: 20,
+    },
+
+    buttonAdd : {
+        backgroundColor: "#45D45D",
+        padding: 10,
+        borderRadius: 10,
+        marginTop: 20,
+    },
+
+    textButton : {
+        fontSize: 15,
+        color: 'white',
     }
 });
